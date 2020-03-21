@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import TimerForm from "./TimerForm";
 import "../styles/ToggleableTimerForm.css";
@@ -8,13 +8,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(fas);
 
-function ToggleableTimerForm({ isOpen }) {
+function ToggleableTimerForm({ createTimer }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
   if (isOpen) {
-    return <TimerForm />;
+    return <TimerForm setIsOpen={setIsOpen} createTimer={createTimer} />;
   }
   return (
     <div className="footer">
-      <button>
+      <button onClick={handleClick}>
         <FontAwesomeIcon icon="plus" />
       </button>
     </div>
@@ -22,7 +26,7 @@ function ToggleableTimerForm({ isOpen }) {
 }
 
 ToggleableTimerForm.propTypes = {
-  isOpen: PropTypes.bool.isRequired
+  createTimer: PropTypes.func.isRequired
 };
 
 export default ToggleableTimerForm;

@@ -3,25 +3,23 @@ import "./App.css";
 import EditableTimerList from "./components/EditableTimerList";
 import ToggleableTimerForm from "./components/ToggleableTimerForm";
 
-const initialTimers = [
-  {
-    id: 0,
-    title: "Mow the Law",
-    project: "House Chores",
-    elapsed: 45678,
-    editFormOpen: false
-  },
-  {
-    id: 1,
-    title: "Clear paper jam",
-    project: "Office Chores",
-    elapsed: 45678,
-    editFormOpen: true
-  }
-];
-
 function App() {
-  const [timers, setTimers] = useState(initialTimers);
+  const [timers, setTimers] = useState([
+    {
+      id: 0,
+      title: "Initial Timer",
+      project: "Learing React",
+      elapsed: 0,
+      editFormOpen: false
+    }
+  ]);
+
+  const createTimer = (title, project) => {
+    setTimers([
+      ...timers,
+      { id: timers.length, title, project, elapsed: 0, editFormOpen: false }
+    ]);
+  };
 
   const changeEditFormOpen = id => {
     setTimers(
@@ -94,7 +92,7 @@ function App() {
           updateElapsed={updateElapsed}
         />
       </div>
-      <ToggleableTimerForm isOpen={false} />
+      <ToggleableTimerForm createTimer={createTimer} />
     </div>
   );
 }

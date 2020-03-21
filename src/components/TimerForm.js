@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import "../styles/TimerForm.css";
 
-function TimerForm({ timer, updateTimer, cancelUpdate }) {
-  const [title, setTitle] = useState(timer.title);
-  const [project, setProject] = useState(timer.project);
+function TimerForm({
+  timer,
+  updateTimer,
+  cancelUpdate,
+  createTimer,
+  setIsOpen
+}) {
+  const [title, setTitle] = useState(timer ? timer.title : "");
+  const [project, setProject] = useState(timer ? timer.project : "");
   const handleChange = (func, val) => {
     func(val);
   };
@@ -15,8 +21,17 @@ function TimerForm({ timer, updateTimer, cancelUpdate }) {
   const handleCancel = () => {
     cancelUpdate(timer.id);
   };
+
+  const handleCreate = e => {
+    e.preventDefault();
+    createTimer(title, project);
+    setIsOpen(false);
+  };
+  const handleCancelCreate = () => {
+    setIsOpen(false);
+  };
   return (
-    <form className="timer-form" onSubmit={handleUpdate}>
+    <form className="timer-form" onSubmit={timer ? handleUpdate : handleCreate}>
       <div className="timer-form-field">
         <label>Title</label> <br />
         <input
@@ -35,19 +50,17 @@ function TimerForm({ timer, updateTimer, cancelUpdate }) {
       </div>
       <div className="timer-form-field">
         <button type="submit" className="update">
-          Update
+          {timer ? "Update" : "Create"}
         </button>
-        <button className="cancel" onClick={handleCancel}>
+        <button
+          className="cancel"
+          onClick={timer ? handleCancel : handleCancelCreate}
+        >
           Cancel
         </button>
       </div>
     </form>
   );
 }
-
-TimerForm.propTypes = {
-  title: PropTypes.string,
-  project: PropTypes.string
-};
 
 export default TimerForm;

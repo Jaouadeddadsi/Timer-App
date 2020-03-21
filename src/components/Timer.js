@@ -15,8 +15,11 @@ const convertSeconds = str => {
   seconds = Math.round(seconds * 100) / 100;
 
   let result = hrs < 10 ? "0" + hrs : hrs;
+  result += " h";
   result += ":" + (min < 10 ? "0" + min : min);
+  result += " m";
   result += ":" + (seconds < 10 ? "0" + seconds : seconds);
+  result += " s";
   return result;
 };
 

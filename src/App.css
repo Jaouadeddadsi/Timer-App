@@ -1,4 +1,5 @@
 .app {
+  margin-bottom: 40px;
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: vertical;
