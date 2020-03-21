@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -20,8 +20,14 @@ const convertSeconds = str => {
   return result;
 };
 
-function Timer({ timer, handleEdit, deleteTimer }) {
+function Timer({ timer, handleEdit, deleteTimer, updateElapsed }) {
   const stringElapsed = convertSeconds(timer.elapsed);
+  const [clicked, setClicked] = useState(false);
+  useEffect(() => {
+    const countup = clicked && setInterval(() => updateElapsed(timer.id), 1000);
+    return () => clearInterval(countup);
+  }, [clicked, timer.id, updateElapsed]);
+
   return (
     <div>
       <div className="timer">
@@ -41,9 +47,15 @@ function Timer({ timer, handleEdit, deleteTimer }) {
           </span>
         </div>
       </div>
-      <div className="control">
-        <p>Start</p>
-      </div>
+      {!clicked ? (
+        <div className="start" onClick={() => setClicked(!clicked)}>
+          <p>Start</p>
+        </div>
+      ) : (
+        <div className="stop" onClick={() => setClicked(!clicked)}>
+          <p>Stop</p>
+        </div>
+      )}
     </div>
   );
 }

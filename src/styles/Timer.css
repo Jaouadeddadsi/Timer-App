@@ -50,7 +50,7 @@
   cursor: pointer;
 }
 
-.control {
+.start {
   width: 300px;
   margin-top: -1px;
   text-align: center;
@@ -58,4 +58,16 @@
   border: 1px solid green;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  cursor: pointer;
+}
+
+.stop {
+  width: 300px;
+  margin-top: -1px;
+  text-align: center;
+  color: red;
+  border: 1px solid red;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
 }

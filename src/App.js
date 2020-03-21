@@ -8,14 +8,14 @@ const initialTimers = [
     id: 0,
     title: "Mow the Law",
     project: "House Chores",
-    elapsed: "45678",
+    elapsed: 45678,
     editFormOpen: false
   },
   {
     id: 1,
     title: "Clear paper jam",
     project: "Office Chores",
-    elapsed: "45678",
+    elapsed: 45678,
     editFormOpen: true
   }
 ];
@@ -65,6 +65,20 @@ function App() {
     setTimers(timers.filter(timer => timer.id !== id));
   };
 
+  const updateElapsed = id => {
+    setTimers(
+      timers.map(timer => {
+        if (timer.id === id) {
+          return {
+            ...timer,
+            elapsed: timer.elapsed + 1
+          };
+        }
+        return timer;
+      })
+    );
+  };
+
   return (
     <div className="app">
       <div className="header">
@@ -77,6 +91,7 @@ function App() {
           updateTimer={updateTimer}
           cancelUpdate={cancelUpdate}
           deleteTimer={deleteTimer}
+          updateElapsed={updateElapsed}
         />
       </div>
       <ToggleableTimerForm isOpen={false} />

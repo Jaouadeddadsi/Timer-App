@@ -8,7 +8,8 @@ function EditableTimer({
   handleEdit,
   updateTimer,
   cancelUpdate,
-  deleteTimer
+  deleteTimer,
+  updateElapsed
 }) {
   if (timer.editFormOpen) {
     return (
@@ -20,7 +21,12 @@ function EditableTimer({
     );
   } else {
     return (
-      <Timer timer={timer} handleEdit={handleEdit} deleteTimer={deleteTimer} />
+      <Timer
+        timer={timer}
+        handleEdit={handleEdit}
+        deleteTimer={deleteTimer}
+        updateElapsed={updateElapsed}
+      />
     );
   }
 }
@@ -30,7 +36,8 @@ EditableTimer.prototype = {
   updateTimer: PropTypes.func.isRequired,
   handleEdit: PropTypes.func.isRequired,
   cancelUpdate: PropTypes.func.isRequired,
-  deleteTimer: PropTypes.func.isRequired
+  deleteTimer: PropTypes.func.isRequired,
+  updateElapsed: PropTypes.func.isRequired
 };
 
 export default EditableTimer;

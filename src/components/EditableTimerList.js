@@ -7,17 +7,20 @@ function EditableTimerList({
   changeEditFormOpen,
   updateTimer,
   cancelUpdate,
-  deleteTimer
+  deleteTimer,
+  updateElapsed
 }) {
   return (
     <>
       {timers.map(timer => (
         <EditableTimer
+          key={timer.id}
           timer={timer}
           handleEdit={changeEditFormOpen}
           updateTimer={updateTimer}
           cancelUpdate={cancelUpdate}
           deleteTimer={deleteTimer}
+          updateElapsed={updateElapsed}
         />
       ))}
     </>
@@ -29,7 +32,8 @@ EditableTimerList.propTypes = {
   changeEditFormOpen: PropTypes.func.isRequired,
   updateTimer: PropTypes.func.isRequired,
   cancelUpdate: PropTypes.func.isRequired,
-  deleteTimer: PropTypes.func.isRequired
+  deleteTimer: PropTypes.func.isRequired,
+  updateElapsed: PropTypes.func.isRequired
 };
 
 export default EditableTimerList;
